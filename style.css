@@ -650,174 +650,130 @@
         transform: scale(1.15);
     }
 }
-/* =========================================
-   SEAMLESS INFINITE MARQUEE
-   ========================================= */
+/* ==============================
+   CONTINUOUS SERVICES MARQUEE
+   ============================== */
 
-.quick {
+.quick-marquee {
     width: 100%;
-    height: 150px;
-
     overflow: hidden;
     position: relative;
 
-    display: flex;
-    align-items: center;
+    padding: 32px 0;
 
     border-top: 1px solid rgba(255,255,255,0.08);
     border-bottom: 1px solid rgba(255,255,255,0.08);
 
-    background: rgba(5, 25, 20, 0.65);
+    background: #03140f;
 }
-
-
-/* Moving track */
 
 .quick-track {
     display: flex;
-    flex-direction: row;
     align-items: center;
 
     width: max-content;
-    height: 100%;
 
-    flex-wrap: nowrap;
-
-    animation: infiniteServices 22s linear infinite;
-
-    will-change: transform;
+    animation: quickScroll 25s linear infinite;
 }
 
-
-/* Each service */
-
+/* Individual item */
 .quick-item {
-    width: 250px;
-    min-width: 250px;
-    height: 120px;
+    flex: 0 0 auto;
 
-    flex: 0 0 250px;
+    width: 230px;
+    margin: 0 25px;
 
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
-    gap: 6px;
-
     text-align: center;
 
-    box-sizing: border-box;
-
-    border: 1px solid transparent;
-    border-radius: 14px;
-
-    transition:
-        transform 0.35s ease,
-        background 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
+    transition: transform 0.3s ease,
+                filter 0.3s ease;
 }
 
-
-/* Icons */
-
+/* Icon */
 .quick-item span {
-    color: #72ff32;
+    font-size: 24px;
+    color: #63ff2f;
 
-    font-size: 22px;
+    margin-bottom: 8px;
 
-    transition:
-        transform 0.35s ease,
-        text-shadow 0.35s ease;
+    transition: transform 0.3s ease,
+                text-shadow 0.3s ease;
 }
 
-
-/* Titles */
-
+/* Title */
 .quick-item b {
-    color: #f2fff6;
-
-    font-size: 14px;
+    color: #ffffff;
+    font-size: 15px;
     font-weight: 700;
+
+    white-space: nowrap;
 }
 
-
-/* Description */
-
+/* Subtitle */
 .quick-item small {
-    color: #86aaa0;
+    color: #8bb7aa;
+    font-size: 12px;
 
-    font-size: 11px;
+    margin-top: 7px;
+
+    white-space: nowrap;
 }
 
+/* Hover */
+.quick-item:hover {
+    transform: scale(1.12);
+}
 
-/* =========================================
-   SEAMLESS LOOP
+.quick-item:hover span {
+    transform: scale(1.2);
 
-   6 items × 250px = 1500px
+    text-shadow:
+        0 0 8px rgba(99,255,47,0.8),
+        0 0 18px rgba(99,255,47,0.5);
+}
 
-   Track moves exactly 1500px.
-   ========================================= */
+/* Continuous movement */
+@keyframes quickScroll {
 
-@keyframes infiniteServices {
-
-    from {
+    0% {
         transform: translateX(0);
     }
 
-    to {
-        transform: translateX(-1500px);
+    100% {
+        transform: translateX(-50%);
     }
 
 }
 
-
-/* =========================================
-   HOVER ZOOM + GLOW
-   ========================================= */
-
-.quick-item:hover {
-    transform: scale(1.08);
-
-    background: rgba(114,255,50,0.06);
-
-    border-color: rgba(114,255,50,0.25);
-
-    box-shadow:
-        0 0 15px rgba(114,255,50,0.12),
-        0 0 30px rgba(114,255,50,0.06);
+/* Pause when cursor is over the marquee */
+.quick-marquee:hover .quick-track {
+    animation-play-state: paused;
 }
 
 
-.quick-item:hover span {
-    transform: scale(1.15);
-
-    text-shadow:
-        0 0 8px rgba(114,255,50,0.8),
-        0 0 18px rgba(114,255,50,0.4);
-}
-
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
+/* Mobile */
 @media (max-width: 768px) {
 
-    .quick {
-        height: 130px;
+    .quick-item {
+        width: 180px;
+        margin: 0 15px;
     }
 
-    .quick-item {
-        width: 190px;
-        min-width: 190px;
-        flex-basis: 190px;
+    .quick-item b {
+        font-size: 13px;
+    }
+
+    .quick-item small {
+        font-size: 11px;
     }
 
     .quick-track {
-        animation-duration: 18s;
+        animation-duration: 20s;
     }
 
 }
