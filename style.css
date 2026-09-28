@@ -817,3 +817,18 @@
     }
 
 }
+/* Stats hover effect */
+
+.stat-item {
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-item:hover b {
+    text-shadow:
+        0 0 10px rgba(114, 255, 50, 0.7),
+        0 0 25px rgba(114, 255, 50, 0.3);
+}
