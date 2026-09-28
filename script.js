@@ -13,3 +13,60 @@ theme(localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme:dark)").
 toggle.onclick=()=>theme(root.dataset.theme==="dark"?"light":"dark");
 const nav=document.querySelector("#nav");document.querySelector("#menu").onclick=()=>nav.classList.toggle("open");
 nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"));
+/* =========================================
+   STATS NUMBER COUNT ANIMATION
+   ========================================= */
+
+const statsSection = document.querySelector("#stats");
+const counters = document.querySelectorAll(".counter");
+
+let statsAnimated = false;
+
+function animateCounter(counter) {
+
+    const target = Number(counter.dataset.target);
+    const suffix = counter.dataset.suffix || "";
+
+    let current = 0;
+
+    const duration = 1800;
+    const startTime = performance.now();
+
+    function updateCounter(currentTime) {
+
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Smooth animation
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+
+        current = Math.floor(target * easeOut);
+
+        counter.textContent = current + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            counter.textContent = target + suffix;
+        }
+    }
+
+    requestAnimationFrame(updateCounter);
+}
+
+
+/* Start animation when cursor enters stats section */
+
+statsSection.addEventListener("mouseenter", () => {
+
+    if (!statsAnimated) {
+
+        statsAnimated = true;
+
+        counters.forEach(counter => {
+            animateCounter(counter);
+        });
+
+    }
+
+});
