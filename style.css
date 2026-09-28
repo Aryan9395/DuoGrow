@@ -650,53 +650,63 @@
         transform: scale(1.15);
     }
 }
-//* =========================================
-   QUICK SERVICES - HORIZONTAL MARQUEE
+/* =========================================
+   SEAMLESS INFINITE MARQUEE
    ========================================= */
 
 .quick {
-    width: 100% !important;
-    height: 150px !important;
-    overflow: hidden !important;
+    width: 100%;
+    height: 150px;
 
-    display: block !important;
+    overflow: hidden;
+    position: relative;
+
+    display: flex;
+    align-items: center;
 
     border-top: 1px solid rgba(255,255,255,0.08);
     border-bottom: 1px solid rgba(255,255,255,0.08);
 
     background: rgba(5, 25, 20, 0.65);
-
-    position: relative;
 }
+
+
+/* Moving track */
 
 .quick-track {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-    width: max-content !important;
-    height: 100% !important;
+    width: max-content;
+    height: 100%;
 
-    flex-wrap: nowrap !important;
+    flex-wrap: nowrap;
 
-    animation: serviceMarquee 25s linear infinite !important;
+    animation: infiniteServices 22s linear infinite;
+
+    will-change: transform;
 }
 
+
+/* Each service */
+
 .quick-item {
-    flex: 0 0 250px !important;
-    width: 250px !important;
-    min-width: 250px !important;
-    height: 120px !important;
+    width: 250px;
+    min-width: 250px;
+    height: 120px;
 
-    display: flex !important;
-    flex-direction: column !important;
+    flex: 0 0 250px;
 
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    flex-direction: column;
 
-    text-align: center !important;
+    align-items: center;
+    justify-content: center;
 
-    gap: 5px;
+    gap: 6px;
+
+    text-align: center;
 
     box-sizing: border-box;
 
@@ -710,61 +720,55 @@
         border-color 0.35s ease;
 }
 
-/* Icon */
+
+/* Icons */
 
 .quick-item span {
-    display: block !important;
-
     color: #72ff32;
 
     font-size: 22px;
-
-    line-height: 1;
 
     transition:
         transform 0.35s ease,
         text-shadow 0.35s ease;
 }
 
-/* Heading */
+
+/* Titles */
 
 .quick-item b {
-    display: block !important;
-
     color: #f2fff6;
 
     font-size: 14px;
-
     font-weight: 700;
-
-    white-space: nowrap;
 }
+
 
 /* Description */
 
 .quick-item small {
-    display: block !important;
-
     color: #86aaa0;
 
     font-size: 11px;
-
-    white-space: nowrap;
 }
 
 
 /* =========================================
-   CONTINUOUS LOOP
+   SEAMLESS LOOP
+
+   6 items × 250px = 1500px
+
+   Track moves exactly 1500px.
    ========================================= */
 
-@keyframes serviceMarquee {
+@keyframes infiniteServices {
 
-    0% {
+    from {
         transform: translateX(0);
     }
 
-    100% {
-        transform: translateX(-50%);
+    to {
+        transform: translateX(-1500px);
     }
 
 }
@@ -775,28 +779,24 @@
    ========================================= */
 
 .quick-item:hover {
-    transform: scale(1.08) !important;
+    transform: scale(1.08);
 
-    background: rgba(75, 255, 35, 0.06);
+    background: rgba(114,255,50,0.06);
 
-    border-color: rgba(114, 255, 50, 0.28);
+    border-color: rgba(114,255,50,0.25);
 
     box-shadow:
-        0 0 15px rgba(114, 255, 50, 0.12),
-        0 0 30px rgba(114, 255, 50, 0.06);
+        0 0 15px rgba(114,255,50,0.12),
+        0 0 30px rgba(114,255,50,0.06);
 }
+
 
 .quick-item:hover span {
     transform: scale(1.15);
 
     text-shadow:
-        0 0 8px rgba(114, 255, 50, 0.8),
-        0 0 18px rgba(114, 255, 50, 0.35);
-}
-
-.quick-item:hover b {
-    text-shadow:
-        0 0 10px rgba(114, 255, 50, 0.25);
+        0 0 8px rgba(114,255,50,0.8),
+        0 0 18px rgba(114,255,50,0.4);
 }
 
 
@@ -804,16 +804,20 @@
    MOBILE
    ========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
     .quick {
-        height: 135px !important;
+        height: 130px;
     }
 
     .quick-item {
-        flex-basis: 200px !important;
-        width: 200px !important;
-        min-width: 200px !important;
+        width: 190px;
+        min-width: 190px;
+        flex-basis: 190px;
+    }
+
+    .quick-track {
+        animation-duration: 18s;
     }
 
 }
