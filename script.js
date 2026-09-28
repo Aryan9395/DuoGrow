@@ -17,56 +17,85 @@ nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"))
    STATS NUMBER COUNT ANIMATION
    ========================================= */
 
-const statsSection = document.querySelector("#stats");
-const counters = document.querySelectorAll(".counter");
+document.addEventListener("DOMContentLoaded", function () {
 
-let statsAnimated = false;
+    const statsSection = document.getElementById("stats");
+    const counters = document.querySelectorAll(".counter");
 
-function animateCounter(counter) {
-
-    const target = Number(counter.dataset.target);
-    const suffix = counter.dataset.suffix || "";
-
-    let current = 0;
-
-    const duration = 1800;
-    const startTime = performance.now();
-
-    function updateCounter(currentTime) {
-
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        // Smooth animation
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-
-        current = Math.floor(target * easeOut);
-
-        counter.textContent = current + suffix;
-
-        if (progress < 1) {
-            requestAnimationFrame(updateCounter);
-        } else {
-            counter.textContent = target + suffix;
-        }
+    if (!statsSection || counters.length === 0) {
+        return;
     }
 
-    requestAnimationFrame(updateCounter);
-}
+    let hasAnimated = false;
 
+    function startCounters() {
 
-/* Start animation when cursor enters stats section */
+        if (hasAnimated) return;
 
-statsSection.addEventListener("mouseenter", () => {
+        hasAnimated = true;
 
-    if (!statsAnimated) {
+        counters.forEach(function (counter) {
 
-        statsAnimated = true;
+            const target = parseInt(counter.getAttribute("data-target"));
+            const suffix = counter.getAttribute("data-suffix") || "";
 
-        counters.forEach(counter => {
-            animateCounter(counter);
+            let start = 0;
+            const duration = 1800;
+            const startTime = performance.now();
+
+            function count(currentTime) {
+
+                const elapsed = currentTime - startTime;
+
+                const progress = Math.min(
+                    elapsed / duration,
+                    1
+                );
+
+                // Smooth ease-out
+                const ease = 1 - Math.pow(1 - progress, 3);
+
+                start = Math.floor(target * ease);
+
+                counter.textContent = start + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(count);
+                } else {
+                    counter.textContent = target + suffix;
+                }
+            }
+
+            requestAnimationFrame(count);
         });
-
     }
+
+
+    /* Cursor stats section ke andar aaye */
+
+    statsSection.addEventListener("mouseenter", startCounters);
+
+
+    /* Agar cursor na bhi aaye, section screen par aaye
+       to animation automatically start ho */
+
+    const observer = new IntersectionObserver(
+        function (entries) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+                    startCounters();
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.35
+        }
+    );
+
+    observer.observe(statsSection);
 
 });
