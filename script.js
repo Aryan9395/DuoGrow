@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const suffix = counter.getAttribute("data-suffix") || "";
 
             let start = 0;
-            const duration = 3500;
+            const duration = 5500;
             const startTime = performance.now();
 
             function count(currentTime) {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const progress = Math.min(
                     elapsed / duration,
-                    1
+                    3
                 );
 
                 // Smooth ease-out
