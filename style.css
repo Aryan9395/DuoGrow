@@ -14,10 +14,15 @@
     justify-content: center;
 
     border-radius: 50%;
+
+    /* Zoom In / Zoom Out Animation */
+    animation: whatsappPulse 1.5s ease-in-out infinite;
+
     transition: transform 0.3s ease;
 }
 
 .whatsapp-float:hover {
+    animation-play-state: paused;
     transform: scale(1.1);
 }
 
@@ -25,4 +30,19 @@
     width: 55px;
     height: 55px;
     object-fit: contain;
+}
+
+/* WhatsApp Zoom Animation */
+@keyframes whatsappPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
