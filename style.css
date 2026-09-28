@@ -652,39 +652,3 @@
 }
 
 
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 900px) {
-
-    .visual-3d {
-        max-width: 550px;
-        height: 430px;
-
-        transform: scale(.85);
-    }
-}
-
-
-@media (max-width: 600px) {
-
-    .visual-3d {
-        height: 360px;
-
-        transform:
-            scale(.58);
-
-        transform-origin: top center;
-
-        margin-bottom: -100px;
-    }
-
-    .dashboard-3d {
-        left: 10px;
-    }
-
-    .lead-phone {
-        right: 0;
-    }
-}
