@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const suffix = counter.getAttribute("data-suffix") || "";
 
             let start = 0;
-            const duration = 1800;
+            const duration = 3500;
             const startTime = performance.now();
 
             function count(currentTime) {
